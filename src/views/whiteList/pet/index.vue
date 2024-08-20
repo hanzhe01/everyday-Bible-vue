@@ -37,6 +37,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="白名单编号" align="center" prop="id" />
       <el-table-column label="白名单ID" align="center" prop="petId" />
+      <el-table-column label="网址+UUID" align="center" prop="urlUuid" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
@@ -51,10 +52,13 @@
       v-model:limit="queryParams.pageSize" @pagination="getList" />
 
     <!-- 添加或修改白名单列表对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="petRef" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" v-model="open" width="560px" append-to-body>
+      <el-form ref="petRef" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="白名单编号" prop="petId">
           <el-input v-model="form.petId" placeholder="请输入白名单编号" />
+        </el-form-item>
+        <el-form-item label="网址+UUID" prop="petId">
+          <el-input v-model="form.urlUuid" placeholder="请输入网址+UUID" />
         </el-form-item>
       </el-form>
       <template #footer>

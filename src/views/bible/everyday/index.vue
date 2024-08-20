@@ -59,7 +59,7 @@
             v-hasPermi="['bible:everyday:edit']">修改</el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
             v-hasPermi="['bible:everyday:remove']">删除</el-button>
-          <el-button link type="primary" icon="View" v-hasPermi="['bible:everyday:view']">预览</el-button>
+          <el-button link type="primary" icon="View" v-hasPermi="['bible:everyday:view']" @click="viewvisible = true">预览</el-button>
           <el-tooltip class="box-item" effect="dark" content="复制ID" placement="top-start"><el-button link type="primary"
               icon="CopyDocument" @click="copyId(scope.row.id)" v-if="false" /></el-tooltip>
         </template>
@@ -133,6 +133,34 @@
           </el-button>
         </div>
       </template>
+    </el-dialog>
+    <el-dialog v-model="viewvisible" title="预览" width="500" align-center draggable="true">
+      <div class="page-container">
+        <swiper :slides-per-view="1" :centeredSlides="true" @swiper="onSwiper" @slideChange="onSlideChange">
+          <swiper-slide>
+            <header class="article-title title-1">lsaiah 40:31</header>
+            <article class="content content-1">
+              “But those who hope in the Lord will renew their strength. They will
+              soar on wings likeeagles; they will run and not grow weary, they will
+              walk and not be faint.”
+            </article>
+            <div class="date-box">August 10, 2024</div>
+            <header class="article-title title-2">This Day In History</header>
+            <article class="content content-2">
+              On August 6, 258 AD, Saint Sixtus ll, the Pope of Rome, was martyred
+              along withseveral of his deacons during the persecution of Christians
+              under Emperor Valerian. Hismartyrdom is a significant event in early
+              Christian history, symbolizing the steadfast faith ofthe Church amidst
+              persecution.
+            </article>
+          </swiper-slide>
+        </swiper>
+        <div class="my-swiper-pagination flex-center">
+          <!-- <span v-for="(item, index) in swiperData" :class="['custom-nav-item', { 'active': index === selectedIndex }]"
+            :key="index" @click="navChange(index)">
+          </span> -->
+        </div>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -381,6 +409,8 @@ async function handleAutoGenerate() {
 //     clipboard.destroy();
 //   });
 // };
+/**预览页面 */
+const viewvisible = ref(false);
 getList();
 </script>
 <style scoped>
@@ -396,5 +426,61 @@ getList();
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+}
+/* 预览 */
+.page-container {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background: url("@/assets/images/home-bg.png") no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  .swiper{
+    width: 100%;
+    height: 100%;
+    .swiper-slide{
+      padding-top: 130px;
+    }
+  }
+  .article-title {
+    color: #0b5699;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .content {
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0 35px;
+  }
+  .date-box {
+    width: 100%;
+    height: 32px;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 32px;
+    margin: 60px 0 40px 0;
+    background: url("@/assets/images/date-border.png") center/contain no-repeat;
+  }
+  .my-swiper-pagination {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 50px;
+    z-index: 999;
+    .custom-nav-item{
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin: 0 6px;
+      cursor: pointer;
+      background: url("@/assets/images/bullet.png") center/contain no-repeat;
+      &.active{
+        background: url("@/assets/images/bullet-active.png") center/contain no-repeat;
+      }
+    }
+  }
 }
 </style>
