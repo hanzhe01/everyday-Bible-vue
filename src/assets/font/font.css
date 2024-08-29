@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Merriweather-Bold";
+  src: url("./Merriweather-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Merriweather-Regular";
+  src: url("./Merriweather-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}

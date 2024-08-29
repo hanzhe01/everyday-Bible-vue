@@ -52,3 +52,11 @@ export function autoGenerateApi(params) {
     timeout: 600000
   })
 }
+
+//获取背景图片
+export function getMoreApi(){
+  return request({
+    url: '/bible/front/more/getMore',
+    method: 'get'
+  })
+}
